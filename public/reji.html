@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova TV - Reji Kontrol Paneli</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    body { background: #0f172a; color: white; font-family: sans-serif; padding: 20px; text-align: center; }
+    h2 { color: #38bdf8; margin-bottom: 20px; }
+    .section { background: #1e293b; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+    .btn { background: #3b82f6; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; }
+    .btn-gol { background: #ef4444; font-size: 20px; width: 80%; padding: 15px; }
+    .btn-mode { background: #8b5cf6; }
+  </style>
+</head>
+<body>
+
+  <h2>📺 NOVA TV REJİ PANELİ</h2>
+
+  <!-- Mod Seçimi -->
+  <div class="section">
+    <h3>Yayın Modları</h3>
+    <button class="btn btn-mode" onclick="setMode('football')">⚽ Futbol Modu</button>
+    <button class="btn btn-mode" onclick="setMode('academy')">🎓 Nova Akademi</button>
+    <button class="btn btn-mode" onclick="setMode('cartoon')">🎬 Çizgi Film</button>
+    <button class="btn btn-mode" onclick="setMode('ezgi')">🌙 Ezgi / Huzur</button>
+  </div>
+
+  <!-- Maç Olay Butonları -->
+  <div class="section">
+    <h3>Maç Olay Efektleri</h3>
+    <button class="btn btn-gol" onclick="triggerEffect('GOL')">⚽ GOL BASTIR!</button>
+  </div>
+
+  <script>
+    const socket = io();
+
+    function setMode(mode) {
+      socket.emit('changeMode', mode);
+    }
+
+    function triggerEffect(effect) {
+      socket.emit('triggerEffect', effect);
+    }
+  </script>
+</body>
+</html>
